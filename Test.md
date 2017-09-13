@@ -22,5 +22,29 @@ Step 2. Open powershell input below commands.
       # docker ps (Check the status of container)
       # docker stop "id"
       # docker start "id"
+      
+      
+      
+docker run -d -p 80:8080 --name lmtest icescrum/icescrum -v external-directory:internal-directory
+
+
+Install a mysql container  
+# docker network create --driver bridge is_net
+# docker pull icescrum/mysql
+# docker run --name mysql -v C:\user\lia21\Desktop\mysql:/var/lib/mysql --net=is_net -e MYSQL_ROOT_PASSWORD=111111 -d icescrum/mysql
+# docker run --name icescrum -v C:\user\lia21\Desktop\home:/root --net=is_net -p 80:8080 -d icescrum/icescrum
+
+
+
+3.连接上述启动的container： sudo docker run -it --link mysql:mysql --rm mysql/mysql-serve
+
+
+docker exec -it mysql bash
+ /etc/init.d/mysql start
+mysql -uroot -p
+CREATE DATABASE `icescrum` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+docker rm $(docker ps -a -q)
 
 
