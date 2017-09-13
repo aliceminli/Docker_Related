@@ -5,7 +5,8 @@ Envrionments:
   Docker: version 17.06.2-ce, build cec0b72 dowload from https://docs.docker.com/docker-for-windows/
   ice scrum docker img: icescrum/icescrum
   
-Step 1. Install docker and enable hyper-v of windows, then restart OS
+Step 1. Install docker and enable hyper-v of windows, then restart OS.
+
 Step 2. Open powershell input below commands.
       
       # docker search icescrum/icescrum
