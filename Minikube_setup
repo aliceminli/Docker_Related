@@ -1,1 +1,34 @@
 ENV: OS: ubuntu-18.04.3
+
+Preparation: 
+# sudo apt-get update
+# sudo apt-get install apt-transport-https
+# sudo apt-get upgrade
+# sudo apt install curl
+
+
+Installing minikube
+
+1. Install kubectl(The Kubernetes command-line tool): 
+a. Install kubectl binary with curl on Linux:
+download latest version:
+# curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+Make the kubectl binary executable.
+# chmod +x ./kubectl
+Move the binary in to your PATH.
+# sudo mv ./kubectl /usr/local/bin/kubectl
+Test to ensure the version you installed is up-to-date:
+# kubectl version
+
+b.Install using native package management (Ubuntu/Debian)
+# sudo apt-get update && sudo apt-get install -y apt-transport-https
+# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+# echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+# sudo apt-get update
+# sudo apt-get install -y kubectl
+
+2. Install a Hypervisor
+For VirtualBox users, install VirtualBox using:
+# sudo apt install virtualbox virtualbox-ext-pack
+
+
