@@ -1,5 +1,7 @@
 ENV: 
 -------------
+Enable hardware virtulization in vcenter web console. 
+VM->edit settings-> virtual hardware -> Expose hardware assisted virtualization to the guest os
 OS: ubuntu-18.04.3
 
 Preparation: 
@@ -30,5 +32,6 @@ For VirtualBox users, install VirtualBox using:
 
 4. start
 # minikube start
+# minikube start --alsologtostderr -v=8 (can get detailed start log)
 
 
