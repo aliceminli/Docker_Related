@@ -6,32 +6,83 @@ OS: ubuntu-18.04.3
 
 Preparation: 
 --------------
+Install linux desktop
+#sudo apt install ubuntu-gnome-desktop
+#sudo systemctl enable gdm
+#sudo systemctl start gdm
+
+Install vnc
+#sudo apt install tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer
+
+VNC password
+#vncpasswd
+
+Config Gnome 3 Desktop environment to use with VNC
+$ vi ~/.vnc/xstartup
+######
+Append the following:
+   #!/bin/sh
+   # Start Gnome 3 Desktop 
+   [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+   [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+   vncconfig -iconic &
+   dbus-launch --exit-with-session gnome-session &
+######
+
+Open vnc
+#vncserver :1
+
 # sudo apt-get update
 # sudo apt-get install apt-transport-https
 # sudo apt-get upgrade
 # sudo apt install curl
 
+Install dokcer (If you use none driver, need install docker)
+----------------
+#sudo apt-get install docker.io
+
+Install a Hypervisor
+For VirtualBox users, install VirtualBox using:
+--------------
+#sudo apt-get install virtualbox virtualbox-ext-pack
+
+install kubectl
+-------------------
+#sudo apt-get update
+#sudo apt-get install -y apt-transport-https
+#curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+#echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+#sudo apt-get update
+#sudo apt-get install -y kubectl
 
 Installing minikube:
 --------------
 1. Install kubectl(The Kubernetes command-line tool): 
 Install using native package management (Ubuntu/Debian)
-# sudo apt-get update && sudo apt-get install -y apt-transport-https
+# sudo apt-get update
+# sudo apt-get install -y apt-transport-https
 # curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 # echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 # sudo apt-get update
 # sudo apt-get install -y kubectl
 
-2. Install a Hypervisor
-For VirtualBox users, install VirtualBox using:
-# sudo apt install virtualbox virtualbox-ext-pack
-
 3. Install Minikube via direct download
-# curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ && chmod +x minikube
+# curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+# chmod +x minikube
 # sudo install minikube /usr/local/bin
 
 4. start
 # minikube start
-# minikube start --alsologtostderr -v=8 (can get detailed start log)
+###start minikube using virtual box
+(minikube start --vm-driver="virtualbox" --alsologtostderr --v=8) 
+###start minikube using None
+(minikube start --vm-driver=None --alsologtostderr --v=8) 
 
+5. dashboard
+#sudo minikube dashboard  --logtostderr --v=8
+route the localhost to ip:8001.
+#sudo kubectl proxy --address='0.0.0.0' --disable-filter=true
+ 
+Access below link.
+http://10.62.81.27:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview
 
