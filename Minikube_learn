@@ -36,7 +36,8 @@ Delete the hello-minikube Deployment:
 
 cpu usage diagram
 #minikube addons list
-#minikube addons open heapster –url
+#minikube addons enable heapster
+#minikube addons open heapster --url
 
 yaml for deployment - nginx
 -----------------
