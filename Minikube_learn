@@ -83,3 +83,4 @@ spec:
     - 公网IP
 ————————————————
 
+#kubectl scale deployment nginx-deployment --replicas=2
